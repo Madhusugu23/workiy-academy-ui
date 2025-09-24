@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'; 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import config from "../config/config";

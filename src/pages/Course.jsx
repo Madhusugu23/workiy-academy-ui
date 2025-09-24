@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../config/config";
+import "./course.css"; // Import the CSS file
 
 const CheckIcon = ({ color = "#10b981", size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
@@ -40,183 +41,35 @@ const Course = () => {
   }, [coursePath]);
   console.log("Course Data:", courseData);
 
-  // 🟢 Prevent rendering until data is loaded
   if (!courseData) {
     return <div style={{ padding: 20 }}>Loading course details...</div>;
   }
 
-  const styles = {
-    page: {
-      overflow: "hidden",
-      background: "#f8fafc",
-      color: "#0f172a",
-      display: "flex",
-      flexDirection: "column",
-    },
-    card: {
-      width: "100%",
-      height: "100%",
-      background: "#ffffff",
-      borderRadius: 0,
-      boxShadow: "none",
-      display: "flex",
-      flexDirection: "column",
-      overflowY: "auto",
-      overflowX: "hidden",
-    },
-    hero: {
-      background: "linear-gradient(135deg,#f59e0b 0%,#fbbf24 100%)",
-      color: "#111827",
-      padding: "32px 16px",
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: 16,
-    },
-    heroTitle: {
-      fontSize: "clamp(20px, 4vw, 32px)",
-      fontWeight: 800,
-    },
-    heroCaption: {
-      fontSize: "clamp(16px, 2.5vw, 22px)",
-      maxWidth: "600px",
-      color: "#1f2937",
-    },
-    heroCta: {
-      background: "#111827",
-      color: "#fff",
-      border: 0,
-      borderRadius: 8,
-      padding: "12px 20px",
-      fontWeight: 700,
-      fontSize: "16px",
-      width: "fit-content",
-      cursor: "pointer",
-    },
-    heroRightImage: {
-      width: "100px",
-      height: "100px",
-      borderRadius: "50%",
-      objectFit: "cover",
-      border: "3px solid rgba(255,255,255,.7)",
-      boxShadow: "0 8px 24px rgba(0,0,0,.15)",
-    },
-    heroBadges: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-      gap: 12,
-      padding: "16px",
-    },
-    badge: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 8,
-      background: "#6d28d9",
-      border: "1px solid #5b21b6",
-      borderRadius: 10,
-      padding: "16px",
-      textAlign: "center",
-      fontSize: "clamp(14px, 2vw, 18px)",
-      color: "#ffffff",
-    },
-    section: {
-      padding: "16px",
-    },
-    sectionTitle: {
-      fontSize: "clamp(16px, 3vw, 20px)",
-      fontWeight: 800,
-      margin: "8px 0 12px 0",
-    },
-    bulletList: {
-      display: "grid",
-      gridTemplateColumns: "1fr",
-      rowGap: 12,
-      margin: 0,
-      padding: 0,
-      listStyle: "none",
-    },
-    bulletItem: {
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 10,
-      padding: "10px 12px",
-      borderRadius: 10,
-      background: "#f8fafc",
-      border: "1px solid #eef2f7",
-    },
-    modules: {
-      display: "grid",
-      gridTemplateColumns: "1fr",
-      rowGap: 10,
-    },
-    moduleItem: {
-      display: "grid",
-      gridTemplateColumns: "28px 1fr",
-      gap: 10,
-      padding: "10px 12px",
-      borderRadius: 10,
-      background: "#f8fafc",
-      border: "1px solid #eef2f7",
-    },
-    moduleIndex: {
-      width: 28,
-      height: 28,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: "#111827",
-      color: "#fff",
-      borderRadius: 8,
-      fontSize: 14,
-      fontWeight: 700,
-    },
-    highlights: {
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gap: 16,
-      padding: "16px",
-    },
-    highlightItem: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 8,
-      background: "#5b21b6",
-      borderRadius: 12,
-      padding: "16px",
-      textAlign: "center",
-      fontSize: "clamp(14px, 3vw, 18px)",
-      color: "#ffffff",
-    },
-  };
-
   return (
-    <div style={styles.page}>
-      <div style={styles.card}>
+    <div className="page">
+      <div className="card">
         {/* HERO */}
-        <div style={styles.hero}>
+        <div className="hero">
           <div style={{ flex: 1, minWidth: "250px" }}>
-            <div style={styles.heroTitle}>{courseData.hero.title}</div>
-            <div style={styles.heroCaption}>{courseData.hero.caption}</div>
-            {/* <button style={styles.heroCta}>{courseData.hero.cta}</button> */}
-            <button style={styles.heroCta}><a href="/contact" target="_self" style={styles.heroCta} >Enroll Now</a></button>
-
+            <div className="heroTitle">{courseData.hero.title}</div>
+            <div className="heroCaption">{courseData.hero.caption}</div>
+            <button className="heroCta">
+              <a href="/contact" target="_self" className="heroCta">
+                Enroll Now
+              </a>
+            </button>
           </div>
           <img
             src={courseData.hero.image}
             alt="Instructor"
-            style={styles.heroRightImage}
+            className="heroRightImage"
           />
         </div>
 
         {/* BADGES */}
-        <div style={styles.heroBadges}>
+        <div className="heroBadges">
           {courseData.badges.map((badge, i) => (
-            <div key={i} style={styles.badge}>
+            <div key={i} className="badge">
               {badge}
             </div>
           ))}
@@ -224,13 +77,13 @@ const Course = () => {
 
         {/* SECTIONS */}
         {courseData.sections.map((section, sIndex) => (
-          <section key={sIndex} style={styles.section}>
-            <div style={styles.sectionTitle}>{section.title}</div>
+          <section key={sIndex} className="section">
+            <div className="sectionTitle">{section.title}</div>
 
             {section.type === "bullets" && (
-              <ul style={styles.bulletList}>
+              <ul className="bulletList">
                 {section.items.map((point, i) => (
-                  <li key={i} style={styles.bulletItem}>
+                  <li key={i} className="bulletItem">
                     <CheckIcon />
                     <span>{point}</span>
                   </li>
@@ -239,10 +92,10 @@ const Course = () => {
             )}
 
             {section.type === "modules" && (
-              <div style={styles.modules}>
+              <div className="modules">
                 {section.items.map((m, i) => (
-                  <div key={i} style={styles.moduleItem}>
-                    <div style={styles.moduleIndex}>{i + 1}</div>
+                  <div key={i} className="moduleItem">
+                    <div className="moduleIndex">{i + 1}</div>
                     <div>{m}</div>
                   </div>
                 ))}
@@ -252,9 +105,9 @@ const Course = () => {
         ))}
 
         {/* HIGHLIGHTS */}
-        <div style={styles.highlights}>
+        <div className="highlights">
           {courseData.highlights.map((h, i) => (
-            <div key={i} style={styles.highlightItem}>
+            <div key={i} className="highlightItem">
               {h}
             </div>
           ))}
